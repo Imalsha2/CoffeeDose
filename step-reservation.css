@@ -1,0 +1,147 @@
+/* Coffee Dose Step-by-Step Reservation Styles */
+
+:root {
+  --primary-color: #3b141c;
+  --secondary-color: #f3961c;
+  --white-color: #fff;
+  --light-pink-color: #faf4f5;
+  --medium-gray-color: #d1c7c2;
+  --success-color: #3bb77e;
+  --danger-color: #e74c3c;
+  --dark-color: #252525;
+}
+
+.step-reservation-container {
+  max-width: 520px;
+  margin: 40px auto 60px auto;
+  background: var(--primary-color);
+  border-radius: 18px;
+  box-shadow: 0 2px 18px rgba(59,20,28,0.10);
+  padding: 32px 24px 24px 24px;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.step {
+  flex: 1 1 0;
+  text-align: center;
+  position: relative;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.step.active {
+  color: var(--secondary-color);
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -50%;
+  top: 50%;
+  width: 100%;
+  height: 3px;
+  background: var(--medium-gray-color);
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+.step.active:not(:last-child)::after {
+  background: var(--secondary-color);
+}
+
+.step-circle {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--medium-gray-color);
+  color: var(--dark-color);
+  line-height: 32px;
+  font-size: 1.1em;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.step.active .step-circle {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.step-form {
+  display: none;
+}
+
+.step-form.active {
+  display: block;
+}
+
+.step-form .form-input {
+  width: 100%;
+  height: 44px;
+  font-size: 1rem;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--medium-gray-color);
+  padding: 0 12px;
+  background: var(--light-pink-color);
+  color: var(--primary-color);
+  transition: border-color 0.2s;
+}
+
+.step-form .form-input:focus {
+  border-color: var(--secondary-color);
+}
+
+.step-form textarea.form-input {
+  height: 80px;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.step-form .button {
+  width: 100%;
+  font-size: 1rem;
+  padding: 12px 0;
+  border-radius: 18px;
+  background: var(--secondary-color);
+  color: var(--white-color);
+  border: none;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.step-form .button:hover {
+  background: var(--light-pink-color);
+  color: var(--dark-color);
+}
+
+.step-form .button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.reservation-success-step {
+  color: var(--success-color);
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-top: 18px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .step-reservation-container {
+    padding: 18px 6px 18px 6px;
+  }
+  .step-indicator {
+    font-size: 0.95em;
+  }
+}
