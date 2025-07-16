@@ -8,89 +8,108 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="step-reservation.css">
 </head>
-<body>
-    <!-- Navbar -->
+<body class="reservation-bg">
+    <!-- Header / Navbar-->
     <header>
         <nav class="navbar section-content">
             <a href="index.html" class="nav-log">
                 <h2 class="logo-text">☕ COFFEE DOSE</h2>
             </a>
             <ul class="nav-menu">
+                <li class="nav-item">
+                    <button id="menu-close-button" class="fas fa-times" type="button" title="Close menu"></button>
+                </li>
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="index.html#menu" class="nav-link">Menu</a></li>
                 <li class="nav-item"><a href="index.html#gallery" class="nav-link">Gallery</a></li>
                 <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
             </ul>
+            <button id="menu-open-button" class="fas fa-bars" title="Open menu" ></button>
         </nav>
     </header>
     <main>
         <section class="reservation-section">
             <div class="section-content" style="max-width: 600px; margin: 0 auto;">
-                <div style="text-align:center; margin-bottom: 30px;">
-                    <h1 style="color: var(--secondary-color); font-size: 2.2rem; margin-bottom: 10px;">Book a Table at Coffee Dose</h1>
+                <div style="text-align:center; margin-bottom: 30px; margin-top: 110px;">
+                    <h1 style="color: var(--secondary-color);  margin-bottom: 10px;">Book a Table </h1>
                     <p style="color: var(--primary-color); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Experience Kandy's most authentic coffee and fusion treats. Our online reservation system guarantees your table in under 60 seconds – Book now to enjoy our signature brews, desserts, and more — only at Coffee Dose.</p>
                 </div>
                 <div class="step-reservation-container">
-                    <div class="step-indicator">
-                        <div class="step active" data-step="1"><span class="step-circle">1</span><br>Details</div>
-                        <div class="step" data-step="2"><span class="step-circle">2</span><br>Date & Time</div>
-                        <div class="step" data-step="3"><span class="step-circle">3</span><br>Confirm</div>
-                    </div>
-                    <form id="step-reservation-form">
-                        <!-- Step 1: Details -->
+                    <form id="roseoud-style-reservation-form">
+                        <!-- Step 1: Party Size -->
                         <div class="step-form active" data-step="1">
-                            <input type="text" class="form-input" name="name" placeholder="Your Name*" required>
-                            <input type="email" class="form-input" name="email" placeholder="Your Email*" required>
-                            <input type="tel" class="form-input" name="phone" placeholder="Phone Number*" required>
+                            <div class="step-title">Party Size</div>
+                            <div class="party-size-group">
+                                <button type="button" class="party-size-btn" data-size="1">1</button>
+                                <button type="button" class="party-size-btn" data-size="2">2</button>
+                                <button type="button" class="party-size-btn" data-size="3">3</button>
+                                <button type="button" class="party-size-btn" data-size="4">4</button>
+                                <button type="button" class="party-size-btn" data-size="5">5</button>
+                                <button type="button" class="party-size-btn" data-size="10">10</button>
+                                <select class="party-size-select" name="party-size-select">
+                                    <option value="">For 1</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </div>
                             <div class="button-group">
                                 <button type="button" class="button next-btn">Next</button>
                             </div>
                         </div>
-                        <!-- Step 2: Date & Time -->
+                        <!-- Step 2: Date Picker -->
                         <div class="step-form" data-step="2">
-                            <input type="number" class="form-input" name="guests" min="1" max="20" placeholder="No. of Guests*" required>
+                            <div class="step-title">Booking date</div>
                             <input type="date" class="form-input" name="date" required>
-                            <input type="time" class="form-input" name="time" required>
+                            <div class="button-group">
+                                <button type="button" class="button prev-btn">Back</button>
+                                <button type="button" class="button next-btn">Next</button>
+                            </div>
+                        </div>
+                        <!-- Step 3: Meal Type & Time Slot -->
+                        <div class="step-form" data-step="3">
+                            <div class="step-title">Select Meal Type</div>
+                            <div class="meal-type-group">
+                                <button type="button" class="meal-type-btn" data-meal="breakfast">Breakfast</button>
+                                <button type="button" class="meal-type-btn" data-meal="lunch">Lunch</button>
+                                <button type="button" class="meal-type-btn" data-meal="dinner">Dinner</button>
+                            </div>
+                            <div class="step-title" style="margin-top:20px;">Select Time Slot</div>
+                            <div class="time-slot-group">
+                                <!-- Time slot buttons will be dynamically inserted here -->
+                            </div>
+                            <div class="button-group">
+                                <button type="button" class="button prev-btn">Back</button>
+                                <button type="button" class="button next-btn">Next</button>
+                            </div>
+                        </div>
+                        <!-- Step 4: User Details -->
+                        <div class="step-form" data-step="4">
+                            <div class="step-title">Your Details</div>
+                            <input type="text" class="form-input" name="name" placeholder="Your Name*" required>
+                            <input type="email" class="form-input" name="email" placeholder="Your Email*" required>
+                            <input type="tel" class="form-input" name="phone" placeholder="Phone Number*" required>
                             <textarea class="form-input" name="note" placeholder="Special Requests (optional)"></textarea>
                             <div class="button-group">
                                 <button type="button" class="button prev-btn">Back</button>
                                 <button type="button" class="button next-btn">Next</button>
                             </div>
                         </div>
-                        <!-- Step 3: Confirm -->
-                        <div class="step-form" data-step="3">
+                        <!-- Step 5: Summary & Confirm -->
+                        <div class="step-form" data-step="5">
                             <div class="reservation-summary" style="margin-bottom:18px;"></div>
                             <div class="button-group">
                                 <button type="button" class="button prev-btn">Back</button>
                                 <button type="submit" class="button">Reserve Now</button>
                             </div>
-                            <div class="reservation-success-step" style="display:none;">Reservation submitted successfully!</div>
+                            <div class="reservation-success-step" style="display:none",;>Reservation submitted successfully!</div>
                         </div>
                     </form>
-                </div>
-                <div style="margin-top: 40px; text-align: center;">
-                    <h3 style="color: var(--secondary-color); margin-bottom: 10px;">Quick Links</h3>
-                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
-                        <div>
-                            <div style="font-weight:600; color:var(--primary-color);">Call for order:</div>
-                            <a href="tel:0772347890" style="color:var(--secondary-color); font-size:1.1em;">077 234-7890</a>
-                        </div>
-                        <div>
-                            <div style="font-weight:600; color:var(--primary-color);">Email:</div>
-                            <a href="mailto:info@coffeedose.com" style="color:var(--secondary-color); font-size:1.1em;">info@coffeedose.com</a>
-                        </div>
-                        <div>
-                            <div style="font-weight:600; color:var(--primary-color);">Location:</div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=No.01+Nagasthenna+road,+Deiyannewela,+Kandy" target="_blank" style="color:var(--secondary-color); font-size:1.1em;">No.01 Nagasthenna road, Deiyannewela, Kandy</a>
-                        </div>
-                        <div>
-                            <div style="font-weight:600; color:var(--primary-color);">Follow us:</div>
-                            <a href="#" class="social-link" style="color:var(--primary-color);font-size:1.3em;margin-right:10px;"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#" class="social-link" style="color:var(--primary-color);font-size:1.3em;margin-right:10px;"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#" class="social-link" style="color:var(--primary-color);font-size:1.3em;"><i class="fa-brands fa-twitter"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -112,87 +131,7 @@
             </p>
         </div>
     </section>
-    <script>
-        // Step-by-step reservation logic
-        (function() {
-            const form = document.getElementById('step-reservation-form');
-            const steps = Array.from(document.querySelectorAll('.step'));
-            const stepForms = Array.from(document.querySelectorAll('.step-form'));
-            let currentStep = 1;
-
-            function showStep(step) {
-                stepForms.forEach(f => f.classList.remove('active'));
-                steps.forEach(s => s.classList.remove('active'));
-                const formToShow = stepForms.find(f => f.getAttribute('data-step') == step);
-                const stepToShow = steps.find(s => s.getAttribute('data-step') == step);
-                if (formToShow) formToShow.classList.add('active');
-                if (stepToShow) stepToShow.classList.add('active');
-                currentStep = step;
-                if (step == 3) fillSummary();
-            }
-
-            function validateStep(step) {
-                const formEl = stepForms.find(f => f.getAttribute('data-step') == step);
-                if (!formEl) return false;
-                let valid = true;
-                Array.from(formEl.querySelectorAll('input,textarea')).forEach(input => {
-                    if (input.hasAttribute('required') && !input.value.trim()) {
-                        input.style.borderColor = 'var(--danger-color)';
-                        valid = false;
-                    } else {
-                        input.style.borderColor = '';
-                    }
-                });
-                return valid;
-            }
-
-            function fillSummary() {
-                const summary = document.querySelector('.reservation-summary');
-                if (!summary) return;
-                const name = form.name.value;
-                const email = form.email.value;
-                const phone = form.phone.value;
-                const guests = form.guests.value;
-                const date = form.date.value;
-                const time = form.time.value;
-                const note = form.note.value;
-                summary.innerHTML = `
-                    <div><b>Name:</b> ${name}</div>
-                    <div><b>Email:</b> ${email}</div>
-                    <div><b>Phone:</b> ${phone}</div>
-                    <div><b>No. of Guests:</b> ${guests}</div>
-                    <div><b>Date:</b> ${date}</div>
-                    <div><b>Time:</b> ${time}</div>
-                    ${note ? `<div><b>Special Requests:</b> ${note}</div>` : ''}
-                `;
-            }
-
-            document.querySelectorAll('.next-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (validateStep(currentStep)) {
-                        showStep(currentStep + 1);
-                    }
-                });
-            });
-            document.querySelectorAll('.prev-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    showStep(currentStep - 1);
-                });
-            });
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                if (!validateStep(currentStep)) return;
-                // Show success message
-                const success = form.querySelector('.reservation-success-step');
-                if (success) success.style.display = 'block';
-                setTimeout(() => {
-                    if (success) success.style.display = 'none';
-                    form.reset();
-                    showStep(1);
-                }, 2500);
-            });
-        })();
-    </script>
+    <script src="script.js"></script>
+    <!-- Placeholder: Add reservation step JS logic here -->
 </body>
 </html>

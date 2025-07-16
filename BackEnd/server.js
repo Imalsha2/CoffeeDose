@@ -1,5 +1,5 @@
 
-const express = require('express');
+/*const express = require('express');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,7 +12,7 @@ app.use(express.json());
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
 const TWILIO_WHATSAPP_FROM = 'whatsapp:+14155238886'; // Twilio sandbox number
-const WHATSAPP_TO = 'whatsapp:+94769264200'; // Owner's WhatsApp number
+const WHATSAPP_TO = 'whatsapp:+9471 683 6787'; // Owner's WhatsApp number
 let twilioClient = null;
 if (TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN) {
     twilioClient = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
