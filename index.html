@@ -51,7 +51,7 @@
                     <p class="description">Welcome to our coffee paradise, where every besn tells a story and every cup sparks joy.</p>
                     
                     <div class="buttons">
-                        <a href="#menu" class="button order-now">Order Now</a>
+                        <a href="#menu" class="button order-now" id="order-now-btn">Order Now</a>
                         <a href="#contact" class="button contact-us">Contact Us</a>
                     </div>
                 </div>
@@ -83,40 +83,79 @@
             <section class="menu-section" id="menu">
                 <h2 class="section-title">Our Menu</h2>
                 <div class="section-content">
-                    <ul class="menu-list">
-                        <li class="menu-item">
+                    <ul class="menu-list" id="menu-list">
+                        <li class="menu-item" data-name="Hot Beverages" data-price="500">
                             <img src="images/hot-beverages.png" alt="Hot Beverages" class="menu-image">
                             <h3 class="name">Hot Beverages</h3>
                             <p class="text">Wide range of Steaming hot coffee to make you fresh and light.</p>
+                            <input type="checkbox" class="menu-select">
+                            <span class="menu-price">Rs. 500</span>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" data-name="Cold Beverages" data-price="450">
                             <img src="images/cold-beverages.png" alt="Cold Beverages" class="menu-image">
                             <h3 class="name">Cold Beverages</h3>
                             <p class="text">Creamy and frothy cold coffee to make you cool.</p>
+                            <input type="checkbox" class="menu-select">
+                            <span class="menu-price">Rs. 450</span>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" data-name="Refreshment" data-price="400">
                             <img src="images/refreshment.png" alt="Refreshment" class="menu-image">
                             <h3 class="name">Refreshment</h3>
                             <p class="text">Fruit and icy refreshing drink to make feel refresh.</p>
+                            <input type="checkbox" class="menu-select">
+                            <span class="menu-price">Rs. 400</span>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" data-name="Special Combo" data-price="800">
                             <img src="images/special-combo.png" alt="Special Combo" class="menu-image">
                             <h3 class="name">Special Combo</h3>
                             <p class="text">Your favorite eating and drinking combination.</p>
+                            <input type="checkbox" class="menu-select">
+                            <span class="menu-price">Rs. 800</span>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" data-name="Desserts" data-price="350">
                             <img src="images/desserts.png" alt="Desserts" class="menu-image">
                             <h3 class="name">Desserts</h3>
                             <p class="text">Satiate your palate and take you on a culinary treat.</p>
+                            <input type="checkbox" class="menu-select">
+                            <span class="menu-price">Rs. 350</span>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" data-name="Burger Frenchfries" data-price="300">
                             <img src="images/burger-frenchfries.png" alt="Burger Frenchfries" class="menu-image">
                             <h3 class="name">Burger Frenchfries</h3>
                             <p class="text">Quick bites to satisfy your small size hunger.</p>
+                            <input type="checkbox" class="menu-select">
+                            <span class="menu-price">Rs. 300</span>
                         </li>
                     </ul>
+                    <button id="menu-ok-btn" class="menu-ok-button" style="margin:30px auto;display:block;width:10rem;">OK</button>
                 </div>
             </section>
+
+            <!-- Order Modal -->
+            <div id="order-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:999;align-items:center;justify-content:center;">
+                <div style="background:#fff;max-width:350px;width:90vw;margin:40px auto;padding:25px 18px;border-radius:18px;box-shadow:0 2px 20px rgba(0,0,0,0.15);position:relative;">
+                    <button id="order-modal-close" style="position:absolute;top:10px;right:10px;font-size:1.3em;background:none;border:none;cursor:pointer;">&times;</button>
+                    <h3 style="text-align:center;margin-bottom:18px;">Place Your Order</h3>
+                    <div id="order-summary"></div>
+                    <form id="order-form">
+                        <input type="text" name="location" placeholder="Your location" required class="form-input" style="margin-bottom:10px;">
+                        <input type="text" name="phone" placeholder="Phone number" required class="form-input" style="margin-bottom:10px;">
+                        <select name="payment" id="payment-method" required class="form-input" style="margin-bottom:10px;">
+                            <option value="">Select payment method</option>
+                            <option value="card">Card Payment</option>
+                            <option value="cash">Cash on Delivery</option>
+                        </select>
+                        <div id="card-fields" style="display:none;">
+                            <input type="text" name="cardnumber" placeholder="Card Number" class="form-input" style="margin-bottom:10px;">
+                            <input type="text" name="cardname" placeholder="Cardholder Name" class="form-input" style="margin-bottom:10px;">
+                            <input type="text" name="expiry" placeholder="Expiry (MM/YY)" class="form-input" style="margin-bottom:10px;">
+                            <input type="text" name="cvv" placeholder="CVV" class="form-input" style="margin-bottom:10px;">
+                        </div>
+                        <button type="submit" class="button" style="width:100%;margin-top:10px;">Place Order</button>
+                    </form>
+                    <div id="order-success" style="display:none;text-align:center;margin-top:18px;color:green;font-weight:600;">Order placed successfully!</div>
+                </div>
+            </div>
 
             <!-- Gallery section -->
             <section class="gallery-section" id="gallery">
