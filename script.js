@@ -1,101 +1,3 @@
-    // Order Now logic
-    const orderNowBtn = document.getElementById("order-now-btn");
-    const menuOkBtn = document.getElementById("menu-ok-btn");
-    const orderModal = document.getElementById("order-modal");
-    const orderModalClose = document.getElementById("order-modal-close");
-    const orderSummary = document.getElementById("order-summary");
-    const orderForm = document.getElementById("order-form");
-    const paymentMethod = document.getElementById("payment-method");
-    const cardFields = document.getElementById("card-fields");
-    const orderSuccess = document.getElementById("order-success");
-    let selectedMenus = [];
-
-    if (orderNowBtn) {
-        orderNowBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            document.getElementById("menu").scrollIntoView({behavior: "smooth"});
-        });
-    }
-
-    if (menuOkBtn) {
-        menuOkBtn.addEventListener("click", function() {
-            // Get selected menu items and their quantities
-            selectedMenus = [];
-            let total = 0;
-            document.querySelectorAll(".menu-item").forEach(function(item) {
-                const checkbox = item.querySelector(".menu-select");
-                const qtyInput = item.querySelector(".menu-qty");
-                if (checkbox && checkbox.checked) {
-                    const name = item.getAttribute("data-name");
-                    const price = parseInt(item.getAttribute("data-price"));
-                    let qty = 1;
-                    if (qtyInput && !isNaN(parseInt(qtyInput.value)) && parseInt(qtyInput.value) > 0) {
-                        qty = parseInt(qtyInput.value);
-                    }
-                    selectedMenus.push({ name, price, qty });
-                    total += price * qty;
-                }
-            });
-            if (selectedMenus.length === 0) {
-                alert("Please select at least one menu item.");
-                return;
-            }
-            // Show modal
-            orderModal.style.display = "flex";
-            // Show summary
-            let html = `<div style='margin-bottom:10px;'><b>Selected Items:</b><ul style='margin:8px 0 0 0;padding:0 0 0 18px;'>`;
-            selectedMenus.forEach(m => {
-                html += `<li>${m.name} x ${m.qty} <span style='color:#f3961c;'>Rs. ${m.price * m.qty}</span></li>`;
-            });
-            html += `</ul></div><div style='margin-bottom:10px;'><b>Total Price:</b> <span style='color:#f3961c;'>Rs. ${total}</span></div>`;
-            orderSummary.innerHTML = html;
-            orderSuccess.style.display = "none";
-            orderForm.style.display = "block";
-        });
-    }
-
-    if (orderModalClose) {
-        orderModalClose.addEventListener("click", function() {
-            orderModal.style.display = "none";
-        });
-    }
-
-    if (paymentMethod) {
-        paymentMethod.addEventListener("change", function() {
-            if (paymentMethod.value === "card") {
-                cardFields.style.display = "block";
-            } else {
-                cardFields.style.display = "none";
-            }
-        });
-    }
-
-    if (orderForm) {
-        orderForm.addEventListener("submit", function(e) {
-            e.preventDefault();
-            // Get form data
-            const location = orderForm.location.value;
-            const phone = orderForm.phone.value;
-            const payment = orderForm.payment.value;
-            let card = {};
-            if (payment === "card") {
-                card = {
-                    cardnumber: orderForm.cardnumber.value,
-                    cardname: orderForm.cardname.value,
-                    expiry: orderForm.expiry.value,
-                    cvv: orderForm.cvv.value
-                };
-            }
-            // Simulate order place
-            orderForm.style.display = "none";
-            orderSuccess.style.display = "block";
-            setTimeout(() => {
-                orderModal.style.display = "none";
-                orderForm.reset();
-            }, 2000);
-        });
-    }
-// Rose Oud Café style reservation step logic
 (function() {
     const form = document.getElementById('roseoud-style-reservation-form');
     if (!form) return;
@@ -354,55 +256,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 document.addEventListener("DOMContentLoaded", function() {
-    // Add quantity input fields to each menu item
-    document.querySelectorAll('.menu-item').forEach(function(item) {
-        if (!item.querySelector('.menu-qty')) {
-            const checkbox = item.querySelector('.menu-select');
-            // Create a flex row for checkbox, label, and qty input
-            const flexRow = document.createElement('div');
-            flexRow.style.display = 'flex';
-            flexRow.style.alignItems = 'center';
-            // Move checkbox into flexRow
-            if (checkbox) flexRow.appendChild(checkbox);
-            // Create qty label and input
-            const label = document.createElement('label');
-            label.textContent = 'Qty:';
-            label.className = 'qty-label';
-            label.style = 'margin-left:8px;font-size:0.95em;color:#fff;display:none;vertical-align:middle;';
-            const qtyInput = document.createElement('input');
-            qtyInput.type = 'number';
-            qtyInput.min = '1';
-            qtyInput.value = '1';
-            qtyInput.className = 'menu-qty';
-            qtyInput.style = 'width:48px;margin-left:6px;border-radius:8px;border:1px solid #ccc;padding:2px 6px;display:none;vertical-align:middle;color:#fff;background:#3b141c;';
-            flexRow.appendChild(label);
-            flexRow.appendChild(qtyInput);
-            // Insert flexRow in place of original checkbox
-            if (checkbox && checkbox.parentNode === item) {
-                item.insertBefore(flexRow, checkbox);
-                item.removeChild(checkbox);
-            } else {
-                item.appendChild(flexRow);
-            }
-            // Show/hide qty input on checkbox change
-            if (checkbox) {
-                checkbox.addEventListener('change', function() {
-                    if (checkbox.checked) {
-                        qtyInput.style.display = '';
-                        label.style.display = '';
-                    } else {
-                        qtyInput.style.display = 'none';
-                        label.style.display = 'none';
-                    }
-                });
-                // Initial state
-                if (checkbox.checked) {
-                    qtyInput.style.display = '';
-                    label.style.display = '';
-                }
-            }
-        }
-    });
     const menuOpenButton = document.getElementById("menu-open-button");
     const menuCloseButton = document.getElementById("menu-close-button");
     const navLinks = document.querySelectorAll(".nav-menu .nav-link");
@@ -444,4 +297,282 @@ document.addEventListener("DOMContentLoaded", function() {
             contactForm.innerHTML = `<div style='text-align:center;padding:30px 0;'><p><span style='color:#fff;'>Message submitted successfully!</span></p><a href='${whatsappLink}' target='_blank' style='color:#25D366;font-size:1.2em;'>Notify Owner on WhatsApp</a></div>`;
         });
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const reservationBtn = document.querySelector('a.button.order-now');
+    if (reservationBtn) {
+        reservationBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.classList.add('page-fade-out');
+            setTimeout(function() {
+                window.location.href = reservationBtn.getAttribute('href');
+            }, 700); // Match the animation duration
+        });
+    }
+});
+
+// Gallery Animation Logic
+(function() {
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const galleryLink = document.querySelector('a[href="#gallery"]');
+  const gallerySection = document.getElementById('gallery');
+  
+  if (galleryItems.length === 0) return;
+
+  // Function to trigger gallery animation
+  function triggerGalleryAnimation() {
+    // Reset all gallery items to hidden state first
+    galleryItems.forEach(item => {
+      item.classList.remove('animate', 'page-load-animate');
+      item.classList.add('animate-ready');
+    });
+
+    // Then trigger animation with staggered delay
+    galleryItems.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.remove('animate-ready');
+        item.classList.add('page-load-animate');
+      }, index * 300); // 300ms delay between each image
+    });
+  }
+
+  // Create Intersection Observer for when gallery section comes into view
+  const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Trigger animation when gallery section is visible
+        triggerGalleryAnimation();
+      }
+    });
+  }, {
+    threshold: 0.3, // Trigger when 30% of the gallery section is visible
+    rootMargin: '0px 0px -100px 0px' // Start animation slightly before section comes into view
+  });
+
+  // Observe gallery section
+  if (gallerySection) {
+    galleryObserver.observe(gallerySection);
+  }
+
+  // Also trigger animation when gallery link is clicked
+  if (galleryLink) {
+    galleryLink.addEventListener('click', function(e) {
+      // Small delay to allow smooth scrolling to gallery section
+      setTimeout(triggerGalleryAnimation, 1000);
+    });
+  }
+
+  // Listen for hash changes (when navigating to #gallery)
+  window.addEventListener('hashchange', function() {
+    if (window.location.hash === '#gallery') {
+      setTimeout(triggerGalleryAnimation, 500);
+    }
+  });
+
+  // Check if we're already on gallery section when page loads
+  if (window.location.hash === '#gallery') {
+    setTimeout(triggerGalleryAnimation, 500);
+  }
+})();
+
+(function() {
+  const menuSection = document.getElementById('menu');
+  if (!menuSection) return;
+  const menuItems = menuSection.querySelectorAll('.menu-item');
+  if (!menuItems.length) return;
+
+  // Set initial direction classes (left/right)
+  menuItems.forEach((item, idx) => {
+    item.classList.remove('menu-animate', 'menu-animate-left', 'menu-animate-right');
+    if (idx % 2 === 0) {
+      item.classList.add('menu-animate-left');
+    } else {
+      item.classList.add('menu-animate-right');
+    }
+  });
+
+  function triggerMenuAnimation() {
+    menuItems.forEach((item, idx) => {
+      setTimeout(() => {
+        item.classList.add('menu-animate');
+      }, idx * 300); // 250ms stagger for more visible effect
+    });
+  }
+
+  // Animate when menu section comes into view, reset when out of view
+  const menuObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        triggerMenuAnimation();
+      } else {
+        menuItems.forEach(item => item.classList.remove('menu-animate'));
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -80px 0px'
+  });
+
+  menuObserver.observe(menuSection);
+
+  // Also animate if user clicks the menu nav link
+  const menuLink = document.querySelector('a[href="#menu"]');
+  if (menuLink) {
+    menuLink.addEventListener('click', function() {
+      setTimeout(triggerMenuAnimation, 600);
+    });
+  }
+
+  // Animate if already on menu section at page load
+  if (window.location.hash === '#menu') {
+    setTimeout(triggerMenuAnimation, 400);
+  }
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+  // GALLERY & MENU ANIMATION CODE
+
+  // Gallery variables
+  const filterButtons = document.querySelectorAll('.gallery-filter-btn');
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+  const prevBtn = document.getElementById('gallery-prev');
+  const nextBtn = document.getElementById('gallery-next');
+  const galleryList = document.querySelector('.gallery-list');
+  const ITEMS_PER_PAGE = 9;
+  const AUTO_SLIDE_INTERVAL = 3000; // ms (3.0 seconds)
+  let currentFilter = 'all';
+  let currentPage = 1;
+  let filteredItems = galleryItems;
+  let autoSlideTimer = null;
+  let isAnimating = false;
+
+  function animateGalleryOut(callback) {
+    isAnimating = true;
+    galleryList.style.opacity = '0';
+    setTimeout(() => {
+      callback();
+      galleryList.style.opacity = '1';
+      setTimeout(() => { isAnimating = false; }, 300);
+    }, 300);
+  }
+
+  function updateGallery(animate = true) {
+    filteredItems = galleryItems.filter(item =>
+      currentFilter === 'all' || item.getAttribute('data-category') === currentFilter
+    );
+    const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = totalPages || 1;
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    function showItems() {
+      galleryItems.forEach(item => item.style.display = 'none');
+      filteredItems.slice(start, end).forEach(item => item.style.display = '');
+      prevBtn.style.display = (filteredItems.length > ITEMS_PER_PAGE) ? '' : 'none';
+      nextBtn.style.display = (filteredItems.length > ITEMS_PER_PAGE) ? '' : 'none';
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+    }
+    if (animate) {
+      animateGalleryOut(showItems);
+    } else {
+      showItems();
+    }
+  }
+
+  function startAutoSlide() {
+    if (autoSlideTimer) clearInterval(autoSlideTimer);
+    autoSlideTimer = setInterval(() => {
+      const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+      if (totalPages <= 1) return;
+      if (isAnimating) return;
+      if (currentPage < totalPages) {
+        currentPage++;
+      } else {
+        currentPage = 1;
+      }
+      updateGallery();
+    }, AUTO_SLIDE_INTERVAL);
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentFilter = this.getAttribute('data-filter');
+      currentPage = 1;
+      updateGallery();
+      startAutoSlide();
+    });
+  });
+
+  prevBtn.addEventListener('click', function() {
+    if (currentPage > 1 && !isAnimating) {
+      currentPage--;
+      updateGallery();
+      startAutoSlide();
+    }
+  });
+
+  nextBtn.addEventListener('click', function() {
+    const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+    if (currentPage < totalPages && !isAnimating) {
+      currentPage++;
+      updateGallery();
+      startAutoSlide();
+    }
+  });
+
+  // Initial display and auto-slide (no animation on first load)
+  galleryList.style.transition = 'none';
+  updateGallery(false);
+  startAutoSlide();
+  setTimeout(() => {
+    galleryList.style.transition = 'opacity 0.35s';
+  }, 50);
+
+  // Pause auto-slide on mouse enter, resume on mouse leave
+  const galleryWrapper = document.querySelector('.gallery-flex-wrapper') || galleryList;
+  galleryWrapper.addEventListener('mouseenter', function() {
+    if (autoSlideTimer) clearInterval(autoSlideTimer);
+  });
+  galleryWrapper.addEventListener('mouseleave', function() {
+    startAutoSlide();
+  });
+
+  // Always reset to All/first page with animation when Gallery nav link is clicked
+  const galleryNavLink = document.querySelector('a.nav-link[href="#gallery"]');
+  if (galleryNavLink) {
+    galleryNavLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-filter') === 'all') btn.classList.add('active');
+      });
+      currentFilter = 'all';
+      currentPage = 1;
+      updateGallery(true);
+      const gallerySection = document.getElementById('gallery');
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // MENU ANIMATION
+  const menuList = document.querySelector('.menu-list');
+  if (menuList) {
+    setTimeout(() => {
+      menuList.classList.add('menu-visible');
+    }, 100);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const logo = document.querySelector('.reservation-logo-img');
+  if (logo) {
+    setTimeout(() => {
+      logo.classList.add('visible');
+    }, 200);
+  }
 });
