@@ -183,9 +183,27 @@
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (!validateStep(currentStep)) return;
-        // Show success message
+        // Show success message and WhatsApp link
         const success = form.querySelector('.reservation-success-step');
-        if (success) success.style.display = 'block';
+        if (success) {
+            success.innerHTML = `Reservation submitted successfully!`;
+            success.style.display = 'block';
+        }
+        // WhatsApp message logic
+        let msg = `New Reservation at Coffee Dose:\n`;
+        msg += `Name: ${reservation.name}\n`;
+        msg += `Email: ${reservation.email}\n`;
+        msg += `Phone: ${reservation.phone}\n`;
+        msg += `Date: ${reservation.date}\n`;
+        msg += `Party Size: ${reservation.partySize}\n`;
+        msg += `Meal Type: ${reservation.mealType}\n`;
+        msg += `Time Slot: ${reservation.timeSlot}\n`;
+        if (reservation.note) msg += `Special Requests: ${reservation.note}\n`;
+        const ownerNumber = '94716836787';
+        const whatsappLink = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(msg)}`;
+        if (success) {
+            success.innerHTML = `<p><span style='color:#fff;'>Reservation submitted successfully!</span></p>\n<a href='${whatsappLink}' target='_blank' style='color:#25D366;font-size:1.2em;'>Notify Owner on WhatsApp</a>`;
+        }
         setTimeout(() => {
             if (success) success.style.display = 'none';
             form.reset();
@@ -194,7 +212,7 @@
             // Reset active states
             form.querySelectorAll('.party-size-btn, .meal-type-btn, .time-slot-btn').forEach(b => b.classList.remove('active'));
             showStep(1);
-        }, 2500);
+        }, 4000);
     });
     // Show first step
     showStep(1);
