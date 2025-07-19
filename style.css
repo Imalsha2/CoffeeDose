@@ -568,12 +568,15 @@ header .navbar {
     position: absolute;
     right: 20px;
     top: 20px;
-    z-index: 1002;
-    background: none;
-    color: var(--white-color);
+    z-index: 2000; /* make sure it's above everything */
+    background: rgba(0,0,0,0.08); /* subtle background for visibility */
+    color: #fff; /* white icon for dark backgrounds */
     font-size: 32px;
     border: none;
-  }
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    padding: 8px 10px;
+}
   .navbar .nav-menu {
     display: none;
     background: #fff !important;
@@ -720,12 +723,16 @@ body.nav-logo-center .navbar .logo-text {
     .menu-section .menu-list {
         gap: 20px;
     }
-
-    .menu-section .menu-list .menu-item,
-    .gallery-section .gallery-list .gallery-item {
+    .menu-section .menu-list .menu-item {
         width: 100%;
     }
-
+    .gallery-section .gallery-list {
+        gap: 16px;
+    }
+    .gallery-section .gallery-list .gallery-item {
+        width: calc(50% - 8px);
+        /* 2 per row, with gap */
+    }
     .footer-section .section-content {
         flex-direction: column;
         gap: 20px;

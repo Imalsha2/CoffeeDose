@@ -338,20 +338,11 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (galleryItems.length === 0) return;
 
-  // Function to trigger gallery animation
+  // Function to trigger gallery animation (IMMEDIATE SHOW, NO DELAY)
   function triggerGalleryAnimation() {
-    // Reset all gallery items to hidden state first
     galleryItems.forEach(item => {
-      item.classList.remove('animate', 'page-load-animate');
-      item.classList.add('animate-ready');
-    });
-
-    // Then trigger animation with staggered delay
-    galleryItems.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.remove('animate-ready');
-        item.classList.add('page-load-animate');
-      }, index * 300); // 300ms delay between each image
+      item.classList.remove('animate', 'page-load-animate', 'animate-ready');
+      item.classList.add('page-load-animate');
     });
   }
 
@@ -457,13 +448,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevBtn = document.getElementById('gallery-prev');
   const nextBtn = document.getElementById('gallery-next');
   const galleryList = document.querySelector('.gallery-list');
-  const ITEMS_PER_PAGE = 9;
+  let ITEMS_PER_PAGE = window.innerWidth <= 640 ? 4 : 9;
   const AUTO_SLIDE_INTERVAL = 3000; // ms (3.0 seconds)
   let currentFilter = 'all';
   let currentPage = 1;
   let filteredItems = galleryItems;
   let autoSlideTimer = null;
   let isAnimating = false;
+
+  window.addEventListener('resize', function() {
+    const newItemsPerPage = window.innerWidth <= 640 ? 4 : 9;
+    if (ITEMS_PER_PAGE !== newItemsPerPage) {
+      ITEMS_PER_PAGE = newItemsPerPage;
+      updateGallery(false); // re-render gallery with new page size
+    }
+  });
 
   function animateGalleryOut(callback) {
     isAnimating = true;
