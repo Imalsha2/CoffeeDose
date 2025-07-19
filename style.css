@@ -721,21 +721,35 @@ body.nav-logo-center .navbar .logo-text {
 /* Responsive screen media query code for max width 640px */
 @media screen and (max-width: 640px) {
     .menu-section .menu-list {
-        gap: 20px;
+        gap: 8px;
     }
     .menu-section .menu-list .menu-item {
-        width: 100%;
+        padding: 6px 0;
+        min-height: 60px;
+        gap: 3px;
     }
     .gallery-section .gallery-list {
         gap: 16px;
     }
     .gallery-section .gallery-list .gallery-item {
-        width: calc(50% - 8px);
+        width: calc(50% - 6px);
         /* 2 per row, with gap */
     }
     .footer-section .section-content {
         flex-direction: column;
         gap: 20px;
+    }
+    .menu-section .menu-list .menu-item .menu-image {
+        max-width: 150px;
+        height: 160px;
+        aspect-ratio: 1;
+        margin: 0 auto 6px;
+    }
+    .menu-section .menu-list .menu-item .name {
+        font-size: 0.95rem;
+    }
+    .menu-section .menu-list .menu-item .text {
+        font-size: 0.65rem;
     }
 }
 
