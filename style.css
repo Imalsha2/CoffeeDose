@@ -40,6 +40,12 @@ html {
     scroll-behavior: smooth;
 }
 
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
 
 /* Stylings for whole site */
 
@@ -720,6 +726,9 @@ body.nav-logo-center .navbar .logo-text {
 
 /* Responsive screen media query code for max width 640px */
 @media screen and (max-width: 640px) {
+    .navbar #menu-open-button {
+        right: 12px;
+    }
     .menu-section .menu-list {
         gap: 8px;
     }
@@ -729,11 +738,15 @@ body.nav-logo-center .navbar .logo-text {
         gap: 3px;
     }
     .gallery-section .gallery-list {
-        gap: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
     }
     .gallery-section .gallery-list .gallery-item {
-        width: calc(50% - 6px);
-        /* 2 per row, with gap */
+        width: calc(50% - 5px);
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
     .footer-section .section-content {
         flex-direction: column;
@@ -750,6 +763,12 @@ body.nav-logo-center .navbar .logo-text {
     }
     .menu-section .menu-list .menu-item .text {
         font-size: 0.65rem;
+    }
+    .gallery-section .gallery-list .gallery-item .gallery-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
     }
 }
 

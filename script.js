@@ -183,12 +183,6 @@
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (!validateStep(currentStep)) return;
-        // Show success message and WhatsApp link
-        const success = form.querySelector('.reservation-success-step');
-        if (success) {
-            success.innerHTML = `Reservation submitted successfully!`;
-            success.style.display = 'block';
-        }
         // WhatsApp message logic
         let msg = `New Reservation at Coffee Dose:\n`;
         msg += `Name: ${reservation.name}\n`;
@@ -201,18 +195,13 @@
         if (reservation.note) msg += `Special Requests: ${reservation.note}\n`;
         const ownerNumber = '94716836787';
         const whatsappLink = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(msg)}`;
-        if (success) {
-            success.innerHTML = `<p><span style='color:#fff;'>Reservation submitted successfully!</span></p>\n<a href='${whatsappLink}' target='_blank' style='color:#25D366;font-size:1.2em;'>Notify Owner on WhatsApp</a>`;
-        }
-        setTimeout(() => {
-            if (success) success.style.display = 'none';
-            form.reset();
-            // Reset reservation data
-            reservation = { partySize: 1, date: '', mealType: '', timeSlot: '', name: '', email: '', phone: '', note: '' };
-            // Reset active states
-            form.querySelectorAll('.party-size-btn, .meal-type-btn, .time-slot-btn').forEach(b => b.classList.remove('active'));
-            showStep(1);
-        }, 4000);
+        // Immediately redirect to WhatsApp
+        window.location.href = whatsappLink;
+        // Reset form and state (optional, not visible to user after redirect)
+        form.reset();
+        reservation = { partySize: 1, date: '', mealType: '', timeSlot: '', name: '', email: '', phone: '', note: '' };
+        form.querySelectorAll('.party-size-btn, .meal-type-btn, .time-slot-btn').forEach(b => b.classList.remove('active'));
+        showStep(1);
     });
     // Show first step
     showStep(1);
