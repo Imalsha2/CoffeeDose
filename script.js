@@ -582,3 +582,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 200);
   }
 });
+
+// Scroll to Top Button Logic
+const scrollBtn = document.getElementById('scrollToTopBtn');
+if (scrollBtn) {
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) {
+            scrollBtn.classList.add('show');
+        } else {
+            scrollBtn.classList.remove('show');
+        }
+    });
+    scrollBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
